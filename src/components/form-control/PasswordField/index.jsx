@@ -1,97 +1,66 @@
-// import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
-// import { OutlinedInput, TextField } from '@mui/material';
-// import {Controller} from 'react-hook-form';
-// import IconButton from '@mui/material/IconButton';
-// import Input from '@mui/material/Input';
-// import InputLabel from '@mui/material/InputLabel';
-// import InputAdornment from '@mui/material/InputAdornment';
-// import FormControl from '@mui/material/FormContrtyol';
-// import Visibility from '@mui/icons-material/Visibili';
-// import VisibilityOff from '@mui/icons-material/VisibilityOff';
-// PasswordField.propTypes = {
-//     form: PropTypes.object.isRequired,
-//     name: PropTypes.string.isRequired,
-//     label: PropTypes.string,
-//     disabled: PropTypes.bool,
-// };
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { Controller } from 'react-hook-form';
 
-// function PasswordField(props) {
-//     const {form, name, label, disable} = props;
-//     const [showPassword, setShowPassword] = useState(false);
-//     const toggleShowPassword = () => {
-//       setShowPassword(x => !x);
-//     }
-//     return (
-//       // <div>
-//       //       <Controller
-//       //   name={name}
-//       //   control={form.control}
-//       //   render={({ field: { onChange, onBlur, value, name }, fieldState: { invalid, error } }) => (
-//       //     <TextField
-//       //       margin="normal"
-//       //       variant="outlined"
-//       //       fullWidth
-//       //       label={label}
-//       //       error={invalid}
-//       //       helperText={error?.message}
-//       //       onChange={onChange}
-//       //       onBlur={onBlur}
-//       //       name={name}
-//       //       value={value}
-//       //       disabled={disable}
-//       //     />
+PasswordField.propTypes = {
+    form: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
 
-//       //   )}
-//       // /> 
-//           <Controller 
+    label: PropTypes.string,
+    disable: PropTypes.bool,
+};
 
-//             name={name}
-//             control={form.control}
-//             render={({ field: { onChange, onBlur, value, name }, fieldState: { invalid, error } }) => (
-//                   <OutlinedInput
-//                 id="outlined-adornment-password"
-//                 type={showPassword ? 'text' : 'password'}
-//                 endAdornment={
-//                   <InputAdornment position="end">
-//                     <IconButton
-//                       aria-label="toggle password visibility"
-//                       onClick={toggleShowPassword}
-//                       edge="end"
-//                     >
-//                       {showPassword ? <VisibilityOff /> : <Visibility />}
-//                     </IconButton>
-//                   </InputAdornment>
-//                 }
-//                 label="Password"
-//               />
+function PasswordField(props) {
+    const {form, name, label} = props;
+    const {control} = form;
 
-//             )}
-//           />
+    const [showPassword,setShowPassword] = useState(false);
 
-//         {/* <FormControl fullWidth margin = "normal" variant="outlined">
-//           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-//           <Controller
-//           <OutlinedInput
-//             id="outlined-adornment-password"
-//             type={showPassword ? 'text' : 'password'}
-//             endAdornment={
-//               <InputAdornment position="end">
-//                 <IconButton
-//                   aria-label="toggle password visibility"
-//                   onClick={toggleShowPassword}
-//                   edge="end"
-//                 >
-//                   {showPassword ? <VisibilityOff /> : <Visibility />}
-//                 </IconButton>
-//               </InputAdornment>
-//             }
-//             label="Password"
-//           />
-//           />
-//         </FormControl>
-//       </div> */}
-//     );
-// }
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
 
-// export default PasswordField;
+    return (
+        <div>
+            <Controller
+                name={name}
+                control={control}
+                
+                render={({field: { onChange, onBlur, value, name, ref },
+                    fieldState: { invalid, isTouched, error }
+                }) => (
+                    <>
+                        <FormControl error={isTouched && invalid} fullWidth margin="normal" variant="outlined">
+                            <InputLabel>{label}</InputLabel>
+                            <OutlinedInput
+                                id={name}
+                                error={invalid}
+                                type={showPassword ? 'text' : 'password'}
+                                label={label}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={toggleShowPassword}
+                                        edge="end"
+                                        >
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                labelWidth={70}
+                                value={value}
+                                onBlur={onBlur}
+                                onChange={onChange}
+                            />
+                        </FormControl>
+                        <FormHelperText error={invalid}>{error?.message}</FormHelperText>
+                    </>
+                )}  
+            />
+        </div>)
+}
+
+export default PasswordField;

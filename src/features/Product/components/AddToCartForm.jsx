@@ -26,8 +26,9 @@ function AddToCartForm({onSubmit = {}}) {
         resolver: yupResolver(schema)
     })
     const handleSubmit = async (values) => {
+        
         if(onSubmit){
-            onSubmit(values);
+            await onSubmit(values);
         }
     }
     return (
@@ -40,7 +41,7 @@ function AddToCartForm({onSubmit = {}}) {
                 type  = "submit" 
                 
                 >
-                Mua
+                Add To Cart
                 </Button>
             </form>
     );

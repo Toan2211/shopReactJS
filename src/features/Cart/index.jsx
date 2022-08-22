@@ -2,12 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cartItemsCountSelector, cartTotalSelector } from './selectors';
 import {useSelector} from 'react-redux'
-import { Box, Container, Grid, Paper, Typography } from '@mui/material';
+import { Box, Container, Grid, IconButton, OutlinedInput, Paper, styled, Typography} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch } from 'react-redux'
+import { removeFromCart, setQuantity } from './cartSlice';
+import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 CartFeature.propTypes = {
     
 };
-
+const GridStyled = styled(Grid)(() => ({
+    display: 'flex',
+    alignItems: 'center', 
+    justifyContent: 'center'
+}))
 function CartFeature(props) {
+    const dispatch = useDispatch()
     const cartItemTotal= useSelector(cartTotalSelector);
     const cartItemCount= useSelector(cartItemsCountSelector);
     const products = useSelector(state => state.cart);
@@ -16,41 +26,70 @@ function CartFeature(props) {
     const getThumbnail = function(product){
         return product.thumbnail ? `https://api.ezfrontend.com${product.thumbnail?.url}` : 'https://via.placeholder.com/300';
     }
+    const handleClickDelete = (productId) => {
+        dispatch(removeFromCart(productId))
+    }
+    const handleIncrement = (item) => {
+        const payload = {id: item.id , quantity: item.quantity+1 }
+        dispatch(setQuantity(payload))
+    }
+    const handleDecrement = (item) => {
+        if(item.quantity > 1) {
+            const payload = {id: item.id , quantity: item.quantity-1 }
+            dispatch(setQuantity(payload))
+        }
+    }
+    if(cartItems.length <= 0) return (<Box>No Products yet</Box>)
     return (
-        <Box margin = "50px 0">
         
+        <Box margin = "50px 0">        
         <Container>
         <Paper elevation={0} padding = "40px" >
             <Grid container spacing = {1} >
                     {
                         cartItems.map((item) => (
                             <>                            
-                            <Grid item xs = {3} width = "100%" style= {{display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
+                            <GridStyled item xs = {3} width = "100%" >
                                 <img src = {getThumbnail(item.product)} alt = {item.product.name} width = "60%" height = "60%"></img>
-                            </Grid>
-                            <Grid item xs = {3} style= {{display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
+                            </GridStyled>
+                            <GridStyled item xs = {3} >
                                 <Typography>{item.product.name}</Typography>
-                            </Grid>
-                            <Grid item xs = {3} style= {{display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
+                            </GridStyled>
+                            <GridStyled item xs = {3} >
                                 {new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(item.product.salePrice)}
-                            </Grid>
-                            <Grid item xs = {3} style= {{display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
-                                <Typography>{item.quantity}</Typography>
-                            </Grid>
+                                <IconButton onClick = {() => handleClickDelete(item.id)}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </GridStyled>
+                            <GridStyled item xs = {3} >
+                                <Box style = {{display: 'flex', flexDirection: 'row'}} >
+                                    <IconButton onClick = {() => handleDecrement(item)} >
+                                        <RemoveCircleOutlineRoundedIcon  />
+                                    </IconButton>
+                                    <OutlinedInput 
+                                        type = "number"
+                                        value = {item.quantity}
+                                        // onChange = {}
+                                    />
+                                    <IconButton onClick = {() => handleIncrement(item)} >
+                                        <AddCircleOutlineRoundedIcon/>
+                                    </IconButton>
+                                </Box>
+                            </GridStyled>
                             </>
                         ))
                     }
                     <>                            
-                            <Grid item xs = {6} width = "100%" style= {{display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
-                            </Grid>
+                            <GridStyled item xs = {6} width = "100%" >
+                            </GridStyled>
 
-                            <Grid item xs = {3} style= {{display: 'flex',alignItems: 'center', justifyContent: 'center', fontWeight: 'bold'}}>
+                            <GridStyled item xs = {3} style= {{fontWeight: 'bold'}}>
                             {new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(cartItemTotal)}
 
-                            </Grid>
-                            <Grid item xs = {3} style= {{display: 'flex',alignItems: 'center', justifyContent: 'center', fontWeight: 'bold'}}>
+                            </GridStyled>
+                            <GridStyled item xs = {3} style= {{fontWeight: 'bold'}}>
                                 {cartItemCount}
-                            </Grid>
+                            </GridStyled>
                             </>
 
 
@@ -58,7 +97,6 @@ function CartFeature(props) {
             </Paper>
             </Container>
         </Box>
-
     );
 }
 

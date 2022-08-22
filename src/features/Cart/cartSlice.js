@@ -25,6 +25,7 @@ const cartSlice = createSlice(
                 }
             },
             setQuantity(state, action){
+                console.log(action)
                 const {id, quantity} = action.payload;
                 const index  = state.cartItems.findIndex(x => x.id === id);
                 if(index >= 0){
