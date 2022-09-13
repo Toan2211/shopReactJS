@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { cartItemsCountSelector, cartTotalSelector } from './selectors';
 import {useSelector} from 'react-redux'
 import { Box, Container, Grid, IconButton, OutlinedInput, Paper, styled, Typography} from '@mui/material';
@@ -8,9 +7,7 @@ import { useDispatch } from 'react-redux'
 import { removeFromCart, setQuantity } from './cartSlice';
 import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-CartFeature.propTypes = {
-    
-};
+
 const GridStyled = styled(Grid)(() => ({
     display: 'flex',
     alignItems: 'center', 

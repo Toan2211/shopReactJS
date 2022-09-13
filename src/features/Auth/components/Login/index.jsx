@@ -2,7 +2,7 @@ import {unwrapResult} from '@reduxjs/toolkit'
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux'
-import { login, register } from '../../userSlice';
+import { login } from '../../userSlice';
 import  {useSnackbar} from 'notistack';
 import LoginForm from '../LoginForm';
 Login.propTypes = {

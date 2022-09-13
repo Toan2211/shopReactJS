@@ -54,7 +54,6 @@ function DetailPage(props) {
                     <Route path="/" element = {<ProductDescription product = {product}/>} />
                     <Route path="/addtional" element = {<ProductAdditional />} />
                     <Route path="/reviews" element = {<ProductReviews />} />
-
                 </Routes>
             </Container>
         </Box>

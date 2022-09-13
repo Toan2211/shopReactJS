@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
-import InputField from '../../../components/form-control/InputField';
 import { Button } from '@mui/material';
 import QuantityField from '../../../components/form-control/QuantityField';
 AddToCartForm.propTypes = {

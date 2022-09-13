@@ -7,14 +7,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Header />
-      <Routes>
-          <Route path="/" element={<Navigate replace to="/products" />} />
-          <Route path= "/products/*" element ={<ProductFeature />}/>
-          <Route path= "/cart/*" element ={<CartFeature />}/>
-
-          {/* <Route element ={<NotFound />}/> */}
-      </Routes> 
+        <Header />
+        <Routes>
+            <Route path="/" element={<Navigate replace to="/products" />} />
+            <Route path= "/products/*" element ={<ProductFeature />}/>
+            <Route path= "/cart/*" element ={<CartFeature />}/>
+        </Routes> 
       </BrowserRouter>
     </div>
   );

@@ -1,12 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Box, Link } from '@mui/material';
-import {NavLink,useLocation} from 'react-router-dom'
-ProductMenu.propTypes = {
-    
-};
+import {NavLink} from 'react-router-dom'
 
-function ProductMenu(props) {
+
+function ProductMenu() {
     return (
         <Box component = "ul" sx ={{display: 'flex', listStyleType: 'none', justifyContent: 'center'}}>
             <li style = {{marginRight: '10px'}}>

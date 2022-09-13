@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, createTheme, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import categoryApi from '../../../../api/categoryApi';
 
 FilterByCategory.propTypes = {
@@ -17,7 +17,6 @@ const style = {
         margin: '5px 0',
     }
 };
-const theme = createTheme();
 function FilterByCategory({onChange}) {
     const [categoryList, setCategoryList] = useState([]);
     useEffect(() => {

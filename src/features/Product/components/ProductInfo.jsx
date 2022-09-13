@@ -1,14 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 
-ProductInfo.propTypes = {
-    
-};
+
 
 function ProductInfo({product = {}}) {
-    const {name, shortDescription, salePrice, originalPrice, promotionPercent} = product;
+    const {name, shortDescription, originalPrice, promotionPercent} = product;
     return (
         <Box>
             <Typography component = "h1" variant = "h5" align = "center">{name}</Typography>
