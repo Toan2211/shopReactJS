@@ -1,22 +1,30 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Controller } from 'react-hook-form';
+/* eslint-disable no-unused-vars */
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import {
+    FormControl,
+    FormHelperText,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput
+} from '@mui/material'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { Controller } from 'react-hook-form'
 
 PasswordField.propTypes = {
     form: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
 
     label: PropTypes.string,
-    disable: PropTypes.bool,
-};
+    disable: PropTypes.bool
+}
 
 function PasswordField(props) {
-    const {form, name, label} = props;
-    const {control} = form;
+    const { form, name, label } = props
+    const { control } = form
 
-    const [showPassword,setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword)
@@ -27,26 +35,39 @@ function PasswordField(props) {
             <Controller
                 name={name}
                 control={control}
-                
-                render={({field: { onChange, onBlur, value, name, ref },
+                render={({
+                    field: { onChange, onBlur, value, name, ref },
                     fieldState: { invalid, isTouched, error }
                 }) => (
                     <>
-                        <FormControl error={isTouched && invalid} fullWidth margin="normal" variant="outlined">
+                        <FormControl
+                            error={isTouched && invalid}
+                            fullWidth
+                            margin="normal"
+                            variant="outlined"
+                        >
                             <InputLabel>{label}</InputLabel>
                             <OutlinedInput
                                 id={name}
                                 error={invalid}
-                                type={showPassword ? 'text' : 'password'}
+                                type={
+                                    showPassword ? 'text' : 'password'
+                                }
                                 label={label}
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={toggleShowPassword}
-                                        edge="end"
+                                            aria-label="toggle password visibility"
+                                            onClick={
+                                                toggleShowPassword
+                                            }
+                                            edge="end"
                                         >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                            {showPassword ? (
+                                                <Visibility />
+                                            ) : (
+                                                <VisibilityOff />
+                                            )}
                                         </IconButton>
                                     </InputAdornment>
                                 }
@@ -56,11 +77,14 @@ function PasswordField(props) {
                                 onChange={onChange}
                             />
                         </FormControl>
-                        <FormHelperText error={invalid}>{error?.message}</FormHelperText>
+                        <FormHelperText error={invalid}>
+                            {error && error.message}
+                        </FormHelperText>
                     </>
-                )}  
+                )}
             />
-        </div>)
+        </div>
+    )
 }
 
-export default PasswordField;
+export default PasswordField

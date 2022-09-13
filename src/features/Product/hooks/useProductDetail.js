@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import productApi from "../../../api/productApi";
-export default function useProductDetail(productId){
-    const [product, setProduct] = useState({});
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react'
+import productApi from '../../../api/productApi'
+export default function useProductDetail(productId) {
+    const [product, setProduct] = useState({})
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         (async () => {
-            try{
-                const reponse = await productApi.get(productId);
-                setProduct(reponse);
+            try {
+                const reponse = await productApi.get(productId)
+                setProduct(reponse)
+            } catch (err) {
+                alert(err)
             }
-            catch(err){
-                
-            }
-            setLoading(false);
+            setLoading(false)
         })()
     }, [productId])
 
-
-    return {product,setLoading}
+    return { product, setLoading }
 }

@@ -1,13 +1,7 @@
-import React from 'react';
-
-
+import React from 'react'
 
 function ProductReviews() {
-    return (
-        <div>
-            reviews
-        </div>
-    );
+    return <div>reviews</div>
 }
 
-export default ProductReviews;
+export default ProductReviews

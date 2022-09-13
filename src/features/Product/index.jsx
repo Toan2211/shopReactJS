@@ -1,23 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Route, Routes} from 'react-router-dom';
-import ListPage from './pages/ListPage';
-import DetailPage from './pages/DetailPage';
-ProductFeature.propTypes = {
-    
-};
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import ListPage from './pages/ListPage'
+import DetailPage from './pages/DetailPage'
 
-function ProductFeature(props) {
+function ProductFeature() {
     return (
         <div>
-
             <Routes>
-                <Route path= "/" element = {<ListPage />} />
-            {/* {/* <Route path="/add" element = {<AddEditPage />} /> */}
-                <Route path="/:productId/*" element = {<DetailPage />} />
+                <Route path="/" element={<ListPage />} />
+                <Route
+                    path="/:productId/*"
+                    element={<DetailPage />}
+                />
             </Routes>
         </div>
-    );
+    )
 }
 
-export default ProductFeature;
+export default ProductFeature
